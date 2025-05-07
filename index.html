@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web导航 | 一站式资源导航</title>
+    <meta name="description" content="一站式SEO、网站开发、AI工具等资源导航网站">
+    <!-- Tailwind CSS 通过CDN引入 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: '#4F46E5',
+                secondary: '#EC4899',
+                accent: '#8B5CF6',
+              }
+            }
+          }
+        }
+    </script>
+    <!-- 额外的自定义CSS -->
+    <style type="text/tailwindcss">
+<style>
+    /* 卡片悬停效果 */
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    /* 链接项目悬停效果 */
+    .link-item a {
+        transition: all 0.2s ease;
+    }
+    .link-item a:hover {
+        background-color: rgba(0,0,0,0.03);
+        border-radius: 0.5rem;
+    }
+    
+    /* 顶部导航栏样式优化 */
+    .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #3b82f6;
+        transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+        width: 100%;
+    }
+    
+    /* 页脚样式 */
+    footer {
+        background: linear-gradient(to right, #1e3a8a, #3b82f6);
+        color: white;
+    }
+</style>
+
+        @layer components {
+          .card {
+            @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300;
+          }
+          .card-header {
+            @apply font-bold text-lg px-4 py-2 border-b;
+          }
+          .card-body {
+            @apply p-4;
+          }
+          .link-item {
+            @apply flex items-center p-2 rounded-lg hover:bg-gray-50 transition-colors;
+          }
+          .category-title {
+            @apply text-2xl font-bold mb-4 text-primary border-l-4 border-primary pl-3;
+          }
+        }
+    </style>
+    <!-- 可选：连接到你的styles.css文件 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- 导航栏 -->
+    <header class="bg-gradient-to-r from-primary to-accent text-white shadow-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold">Web导航</div>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="#research" class="hover:text-gray-200">需求调研</a></li>
+                        <li><a href="#essentials" class="hover:text-gray-200">上站必备</a></li>
+                        <li><a href="#competitor" class="hover:text-gray-200">竞品调研</a></li>
+                        <li><a href="#templates" class="hover:text-gray-200">上站模板</a></li>
+                        <li><a href="#news" class="hover:text-gray-200">资讯</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4 py-8">
+<main class="container mx-auto px-4 py-8">
+    <!-- 需求调研区域 -->
+    <section id="research" class="mb-12">
+        <h2 class="category-title">需求调研</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- SEO工具卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-blue-500 to-blue-600 text-white">SEO工具</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://ahrefs.com" target="_blank" class="flex items-center">
+                                <span class="text-blue-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Ahrefs</span>
+                                    <p class="text-sm text-gray-500">全面的SEO工具套件</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://moz.com" target="_blank" class="flex items-center">
+                                <span class="text-blue-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Moz</span>
+                                    <p class="text-sm text-gray-500">SEO软件和工具</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://www.semrush.com" target="_blank" class="flex items-center">
+                                <span class="text-blue-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">SEMrush</span>
+                                    <p class="text-sm text-gray-500">在线能见度管理平台</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 关键词研究卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-green-500 to-green-600 text-white">关键词研究</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://trends.google.com" target="_blank" class="flex items-center">
+                                <span class="text-green-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Google Trends</span>
+                                    <p class="text-sm text-gray-500">搜索趋势分析工具</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://answerthepublic.com" target="_blank" class="flex items-center">
+                                <span class="text-green-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Answer The Public</span>
+                                    <p class="text-sm text-gray-500">关键词问题生成器</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 流量分析卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-purple-500 to-purple-600 text-white">流量分析</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://www.similarweb.com" target="_blank" class="flex items-center">
+                                <span class="text-purple-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">SimilarWeb</span>
+                                    <p class="text-sm text-gray-500">网站流量分析工具</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://analytics.google.com" target="_blank" class="flex items-center">
+                                <span class="text-purple-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Google Analytics</span>
+                                    <p class="text-sm text-gray-500">网站分析服务</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 上站必备区域 -->
+    <section id="essentials" class="mb-12">
+        <h2 class="category-title">上站必备</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 网站开发工具卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-red-500 to-red-600 text-white">网站开发</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://wordpress.org" target="_blank" class="flex items-center">
+                                <span class="text-red-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">WordPress</span>
+                                    <p class="text-sm text-gray-500">内容管理系统</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://www.wix.com" target="_blank" class="flex items-center">
+                                <span class="text-red-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1
+            <!-- 域名与主机卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-orange-500 to-orange-600 text-white">域名与主机</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://www.namecheap.com" target="_blank" class="flex items-center">
+                                <span class="text-orange-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Namecheap</span>
+                                    <p class="text-sm text-gray-500">域名注册和主机服务</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://www.bluehost.com" target="_blank" class="flex items-center">
+                                <span class="text-orange-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Bluehost</span>
+                                    <p class="text-sm text-gray-500">网站托管服务</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 竞品调研区域 -->
+    <section id="competitor-research" class="mb-12">
+        <h2 class="category-title">竞品调研</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 竞争对手分析工具卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-indigo-500 to-indigo-600 text-white">竞争对手分析</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://www.spyfu.com" target="_blank" class="flex items-center">
+                                <span class="text-indigo-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">SpyFu</span>
+                                    <p class="text-sm text-gray-500">竞争对手关键词研究</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://www.alexa.com" target="_blank" class="flex items-center">
+                                <span class="text-indigo-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Alexa</span>
+                                    <p class="text-sm text-gray-500">网站流量排名</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 社交媒体分析卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-yellow-500 to-yellow-600 text-white">社交媒体分析</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://www.socialbakers.com" target="_blank" class="flex items-center">
+                                <span class="text-yellow-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">Socialbakers</span>
+                                    <p class="text-sm text-gray-500">社交媒体分析平台</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://www.buzzsumo.com" target="_blank" class="flex items-center">
+                                <span class="text-yellow-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">BuzzSumo</span>
+                                    <p class="text-sm text-gray-500">内容和社交媒体研究</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 上站模板区域 -->
+    <section id="templates" class="mb-12">
+        <h2 class="category-title">上站模板</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 网站模板卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-pink-500 to-pink-600 text-white">网站模板</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://themeforest.net" target="_blank" class="flex items-center">
+                                <span class="text-pink-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">ThemeForest</span>
+                                    <p class="text-sm text-gray-500">网站模板市场</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="link-item">
+                            <a href="https://www.templatemonster.com" target="_blank" class="flex items-center">
+                                <span class="text-pink-500 mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                    </svg>
+                                </span>
+                                <div>
+                                    <span class="font-medium">TemplateMonster</span>
+                                    <p class="text-sm text-gray-500">网页设计模板</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- UI素材卡片 -->
+            <div class="card">
+                <div class="card-header bg-gradient-to-r from-teal-500 to-teal-600 text-white">UI素材</div>
+                <div class="card-body">
+                    <ul class="space-y-2">
+                        <li class="link-item">
+                            <a href="https://www.freepik.com" target="_blank" class="flex items-center">
+                                <span class="text-teal-500 mr-2">
+                                
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Web导航 | 一站式资源导航</p>
+        </div>
+    </footer>
+<footer class="py-8 mt-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4">产品经理导航</h3>
+                <p class="text-blue-100">一站式产品经理工作资源集合，助您提升工作效率。</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">快捷链接</h3>
+                <ul class="space-y-2">
+                    <li><a href="#needs-research" class="text-blue-100 hover:text-white">需求调研</a></li>
+                    <li><a href="#competitor-research" class="text-blue-100 hover:text-white">竞品调研</a></li>
+                    <li><a href="#essentials" class="text-blue-100 hover:text-white">上站必备</a></li>
+                    <li><a href="#templates" class="text-blue-100 hover:text-white">上站模板</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">关于</h3>
+                <p class="text-blue-100">本站致力于帮助产品经理整合高质量工作资源，提高工作效率。</p>
+                <p class="mt-4 text-blue-100">© 2023 产品经理导航. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script>
+    // 平滑滚动到锚点
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            window.scrollTo({
+                top: targetElement.offsetTop - 80, // 80px的偏移量，以便顶部导航不遮挡内容
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // 页面加载动画
+    window.addEventListener('load', function() {
+        document.body.classList.add('loaded');
+        
+        // 为卡片添加顺序出现动画
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+    });
+    
+    // 初始设置卡片不可见
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+    });
+</script>
+</body>
+</html>
