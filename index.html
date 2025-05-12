@@ -3,513 +3,1031 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web导航 | 一站式资源导航</title>
-    <meta name="description" content="一站式SEO、网站开发、AI工具等资源导航网站">
-    <!-- Tailwind CSS 通过CDN引入 -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 自定义Tailwind配置 -->
-    <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                primary: '#4F46E5',
-                secondary: '#EC4899',
-                accent: '#8B5CF6',
-              }
-            }
-          }
-        }
-    </script>
-    <!-- 额外的自定义CSS -->
-    <style type="text/tailwindcss">
-<style>
-    /* 卡片悬停效果 */
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    /* 链接项目悬停效果 */
-    .link-item a {
-        transition: all 0.2s ease;
-    }
-    .link-item a:hover {
-        background-color: rgba(0,0,0,0.03);
-        border-radius: 0.5rem;
-    }
-    
-    /* 顶部导航栏样式优化 */
-    .nav-link {
-        position: relative;
-        transition: color 0.3s ease;
-    }
-    .nav-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -4px;
-        left: 0;
-        background-color: #3b82f6;
-        transition: width 0.3s ease;
-    }
-    .nav-link:hover::after {
-        width: 100%;
-    }
-    
-    /* 页脚样式 */
-    footer {
-        background: linear-gradient(to right, #1e3a8a, #3b82f6);
-        color: white;
-    }
-</style>
+    <title>Web导航</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+/* 添加CSS变量以控制部分间距 */
+:root {
+    --section-spacing: -10px; /* 通过修改这个值可以控制各部分之间的间距 */
+}
 
-        @layer components {
-          .card {
-            @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300;
-          }
-          .card-header {
-            @apply font-bold text-lg px-4 py-2 border-b;
-          }
-          .card-body {
-            @apply p-4;
-          }
-          .link-item {
-            @apply flex items-center p-2 rounded-lg hover:bg-gray-50 transition-colors;
-          }
-          .category-title {
-            @apply text-2xl font-bold mb-4 text-primary border-l-4 border-primary pl-3;
-          }
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.header {
+    background-color: #5b4ee2;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1600px; /* 增加容器最大宽度 */
+    margin: 20px auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 保持两列等宽 */
+    /* 移除或修改grid-template-areas，因为我们现在使用左列容器 */
+    gap: 20px; /* 控制左右两列之间的间距 */
+}
+
+/* 左列Flex布局 */
+.left-column {
+    grid-column: 1; /* 在Grid中占据第一列 */
+    grid-row: 1 / span 3; /* 假设有3行，占据从第1行开始的所有行 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 控制泛资讯和需求调研之间的间距，可以调整这个值 */
+}
+
+
+#section-info {
+    grid-area: info;
+}
+
+#section-analysis {
+    grid-column: 2; /* 指定在第二列 */
+    grid-row: 1; /* 第一行 */
+    align-self: start;
+}
+
+#section-research {
+    grid-area: research;
+}
+
+#section-template {
+    grid-column: 2; /* 指定在第二列 */
+    grid-row: 2; /* 第二行 */
+    align-self: start;
+}
+
+#section-essential {
+    grid-area: essential;
+    margin-top: calc(var(--section-spacing) * -1); /* 使用变量控制与research的间距 */
+}
+
+.section {
+    margin-bottom: var(--section-spacing); /* 使用变量控制section间距 */
+    width: 100%;
+}
+
+/* 特别处理：泛资讯区域的最后一个元素底部间隔减小 */
+#section-info .section-content:last-child {
+    margin-bottom: calc(var(--section-spacing) / 3); /* 使用变量的比例值 */
+}
+
+.section-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.section-content {
+    margin-bottom: calc(var(--section-spacing) * 2/3); /* 使用变量的比例值 */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.category-wrapper {
+    width: 100%;
+}
+
+.category {
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    margin-bottom: 8px;
+    width: 100%;
+    display: block;
+}
+
+/* 各分类标题颜色 */
+.blue { background-color: #4285f4; }
+.green { background-color: #34a853; }
+.purple { background-color: #8e44ad; }
+.red { background-color: #ea4335; }
+.orange { background-color: #fbbc05; }
+.teal { background-color: #009688; }
+
+.site-group {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px; /* 增加网站项目间距 */
+    width: 100%;
+}
+
+.site-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.site-icon {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0; /* 防止图标缩小 */
+}
+
+.site-info {
+    width: 100%; /* 确保文本区域占据所有剩余空间 */
+}
+
+.site-info a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px; /* 稍微减小字体以适应更多文本 */
+    display: block;
+    margin-bottom: 5px;
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 超长文本显示省略号 */
+}
+
+.site-info p {
+    color: #666;
+    font-size: 12px; /* 稍微减小描述字体 */
+}
+
+/* 响应式设计 */
+@media (max-width: 1400px) {
+    .site-group {
+        grid-template-columns: repeat(3, 1fr); /* 中等屏幕为3列 */
+    }
+}
+
+@media (max-width: 992px) {
+    /* 小屏幕时重置间距变量 */
+    :root {
+        --section-spacing: 20px; /* 小屏幕时减小间距 */
+    }
+    
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "info"
+            "research"
+            "analysis"
+            "essential"
+            "template";
+    }
+    
+    .site-group {
+        grid-template-columns: repeat(3, 1fr); /* 平板模式为3列 */
+    }
+    
+    /* 小屏幕时恢复默认间距 */
+    #section-info, #section-research, #section-essential {
+        margin-bottom: var(--section-spacing);
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-group {
+        grid-template-columns: repeat(2, 1fr); /* 小平板模式为2列 */
+    }
+    
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .logo {
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    :root {
+        --section-spacing: 15px; /* 手机屏幕时进一步减小间距 */
+    }
+    
+    .site-group {
+        grid-template-columns: 1fr; /* 手机模式为1列 */
+    }
+}
     </style>
-    <!-- 可选：连接到你的styles.css文件 -->
-    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- 导航栏 -->
-    <header class="bg-gradient-to-r from-primary to-accent text-white shadow-md">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold">Web导航</div>
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="#research" class="hover:text-gray-200">需求调研</a></li>
-                        <li><a href="#essentials" class="hover:text-gray-200">上站必备</a></li>
-                        <li><a href="#competitor" class="hover:text-gray-200">竞品调研</a></li>
-                        <li><a href="#templates" class="hover:text-gray-200">上站模板</a></li>
-                        <li><a href="#news" class="hover:text-gray-200">资讯</a></li>
-                    </ul>
-                </nav>
-            </div>
+<body>
+    <div class="header">
+        <div class="logo">Web导航</div>
+        <div class="nav">
+            <a href="#section-info">泛资讯</a>
+            <a href="#section-research">需求调研</a>
+            <a href="#section-analysis">网站分析</a>
+            <a href="#section-essential">上站必备</a>
+            <a href="#section-template">上站模板</a>
         </div>
-    </header>
+    </div>
 
-    <!-- 主要内容区域 -->
-    <main class="container mx-auto px-4 py-8">
-<main class="container mx-auto px-4 py-8">
-    <!-- 需求调研区域 -->
-    <section id="research" class="mb-12">
-        <h2 class="category-title">需求调研</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- SEO工具卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-blue-500 to-blue-600 text-white">SEO工具</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://ahrefs.com" target="_blank" class="flex items-center">
-                                <span class="text-blue-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Ahrefs</span>
-                                    <p class="text-sm text-gray-500">全面的SEO工具套件</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://moz.com" target="_blank" class="flex items-center">
-                                <span class="text-blue-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Moz</span>
-                                    <p class="text-sm text-gray-500">SEO软件和工具</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://www.semrush.com" target="_blank" class="flex items-center">
-                                <span class="text-blue-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">SEMrush</span>
-                                    <p class="text-sm text-gray-500">在线能见度管理平台</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
+    <div class="container">
+      <!-- 创建左列容器 -->
+      <div class="left-column">
+        <!-- 泛资讯 -->
+        <div id="section-info" class="section">
+            <h2 class="section-title">泛资讯</h2>
+            <div class="section-content">
+                <div class="category-wrapper">
+                    <div class="category blue">科技资讯</div>
+                    <div class="site-group">
+                        <!-- Reddit -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://www.redditstatic.com/desktop2x/img/favicon/favicon-32x32.png');"></div>
+                            <div class="site-info">
+                                <a href="https://www.reddit.com/?rdt=65096" target="_blank">Reddit</a>
+                                <p>全球最大的社区论坛网站，用户生成内容平台</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Reddit 子社区 -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://www.notion.so/images/favicon.ico');"></div>
+                            <div class="site-info">
+                                <a href="https://liberating-doll-b8a.notion.site/Reddit-1a8e8aed91b18021839ecba8b74e530b" target="_blank">Reddit 子社区</a>
+                                <p>Reddit平台上相关主题社区的汇总指南</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Indie Hackers -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://www.indiehackers.com/favicon-32x32.png');"></div>
+                            <div class="site-info">
+                                <a href="https://www.indiehackers.com/" target="_blank">Indie Hackers</a>
+                                <p>独立开发者和创业者分享经验的社区</p>
+                            </div>
+                        </div>
+                        
+                        <!-- X -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc7275.png');"></div>
+                            <div class="site-info">
+                                <a href="https://x.com/home" target="_blank">X</a>
+                                <p>全球流行的社交媒体和短消息分享平台</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 即刻 -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://web.okjike.com/favicon.ico');"></div>
+                            <div class="site-info">
+                                <a href="https://web.okjike.com/following" target="_blank">即刻</a>
+                                <p>中文兴趣社交平台，关注话题获取优质内容</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 500 MRR -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://www.500mrr.com/favicon.ico');"></div>
+                            <div class="site-info">
+                                <a href="https://www.500mrr.com/" target="_blank">500 MRR</a>
+                                <p>分享月收入500美元以上独立创业项目的平台</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Hacker News -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://news.ycombinator.com/favicon.ico');"></div>
+                            <div class="site-info">
+                                <a href="https://news.ycombinator.com/" target="_blank">Hacker News</a>
+                                <p>Y Combinator运营的科技创业新闻和讨论社区</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Google 搜索中心 -->
+                        <div class="site-item">
+                            <div class="site-icon" style="background-image: url('https://developers.google.com/favicon.ico');"></div>
+                            <div class="site-info">
+                                <a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content?hl=zh-cn" target="_blank">Google 搜索中心</a>
+                                <p>Google官方提供的搜索引擎优化和内容创建指南</p>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- 关键词研究卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-green-500 to-green-600 text-white">关键词研究</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://trends.google.com" target="_blank" class="flex items-center">
-                                <span class="text-green-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Google Trends</span>
-                                    <p class="text-sm text-gray-500">搜索趋势分析工具</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://answerthepublic.com" target="_blank" class="flex items-center">
-                                <span class="text-green-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Answer The Public</span>
-                                    <p class="text-sm text-gray-500">关键词问题生成器</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 流量分析卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-purple-500 to-purple-600 text-white">流量分析</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://www.similarweb.com" target="_blank" class="flex items-center">
-                                <span class="text-purple-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">SimilarWeb</span>
-                                    <p class="text-sm text-gray-500">网站流量分析工具</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://analytics.google.com" target="_blank" class="flex items-center">
-                                <span class="text-purple-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Google Analytics</span>
-                                    <p class="text-sm text-gray-500">网站分析服务</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 上站必备区域 -->
-    <section id="essentials" class="mb-12">
-        <h2 class="category-title">上站必备</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- 网站开发工具卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-red-500 to-red-600 text-white">网站开发</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://wordpress.org" target="_blank" class="flex items-center">
-                                <span class="text-red-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">WordPress</span>
-                                    <p class="text-sm text-gray-500">内容管理系统</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://www.wix.com" target="_blank" class="flex items-center">
-                                <span class="text-red-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1
-            <!-- 域名与主机卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-orange-500 to-orange-600 text-white">域名与主机</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://www.namecheap.com" target="_blank" class="flex items-center">
-                                <span class="text-orange-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Namecheap</span>
-                                    <p class="text-sm text-gray-500">域名注册和主机服务</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://www.bluehost.com" target="_blank" class="flex items-center">
-                                <span class="text-orange-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Bluehost</span>
-                                    <p class="text-sm text-gray-500">网站托管服务</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 竞品调研区域 -->
-    <section id="competitor-research" class="mb-12">
-        <h2 class="category-title">竞品调研</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- 竞争对手分析工具卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-indigo-500 to-indigo-600 text-white">竞争对手分析</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://www.spyfu.com" target="_blank" class="flex items-center">
-                                <span class="text-indigo-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">SpyFu</span>
-                                    <p class="text-sm text-gray-500">竞争对手关键词研究</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://www.alexa.com" target="_blank" class="flex items-center">
-                                <span class="text-indigo-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Alexa</span>
-                                    <p class="text-sm text-gray-500">网站流量排名</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- 社交媒体分析卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-yellow-500 to-yellow-600 text-white">社交媒体分析</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://www.socialbakers.com" target="_blank" class="flex items-center">
-                                <span class="text-yellow-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">Socialbakers</span>
-                                    <p class="text-sm text-gray-500">社交媒体分析平台</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://www.buzzsumo.com" target="_blank" class="flex items-center">
-                                <span class="text-yellow-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">BuzzSumo</span>
-                                    <p class="text-sm text-gray-500">内容和社交媒体研究</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 上站模板区域 -->
-    <section id="templates" class="mb-12">
-        <h2 class="category-title">上站模板</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- 网站模板卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-pink-500 to-pink-600 text-white">网站模板</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://themeforest.net" target="_blank" class="flex items-center">
-                                <span class="text-pink-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">ThemeForest</span>
-                                    <p class="text-sm text-gray-500">网站模板市场</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="link-item">
-                            <a href="https://www.templatemonster.com" target="_blank" class="flex items-center">
-                                <span class="text-pink-500 mr-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                        <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                                    </svg>
-                                </span>
-                                <div>
-                                    <span class="font-medium">TemplateMonster</span>
-                                    <p class="text-sm text-gray-500">网页设计模板</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- UI素材卡片 -->
-            <div class="card">
-                <div class="card-header bg-gradient-to-r from-teal-500 to-teal-600 text-white">UI素材</div>
-                <div class="card-body">
-                    <ul class="space-y-2">
-                        <li class="link-item">
-                            <a href="https://www.freepik.com" target="_blank" class="flex items-center">
-                                <span class="text-teal-500 mr-2">
-                                
-
-    </main>
-
-    <!-- 页脚 -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Web导航 | 一站式资源导航</p>
-        </div>
-    </footer>
-<footer class="py-8 mt-12">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="text-xl font-bold mb-4">产品经理导航</h3>
-                <p class="text-blue-100">一站式产品经理工作资源集合，助您提升工作效率。</p>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">快捷链接</h3>
-                <ul class="space-y-2">
-                    <li><a href="#needs-research" class="text-blue-100 hover:text-white">需求调研</a></li>
-                    <li><a href="#competitor-research" class="text-blue-100 hover:text-white">竞品调研</a></li>
-                    <li><a href="#essentials" class="text-blue-100 hover:text-white">上站必备</a></li>
-                    <li><a href="#templates" class="text-blue-100 hover:text-white">上站模板</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold mb-4">关于</h3>
-                <p class="text-blue-100">本站致力于帮助产品经理整合高质量工作资源，提高工作效率。</p>
-                <p class="mt-4 text-blue-100">© 2023 产品经理导航. All rights reserved.</p>
             </div>
         </div>
     </div>
-</footer>
-<script>
-    // 平滑滚动到锚点
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            window.scrollTo({
-                top: targetElement.offsetTop - 80, // 80px的偏移量，以便顶部导航不遮挡内容
-                behavior: 'smooth'
-            });
-        });
-    });
-    
-    // 页面加载动画
-    window.addEventListener('load', function() {
-        document.body.classList.add('loaded');
+</div>
+
+<!-- 需求调研 -->
+<div id="section-research" class="section">
+    <h2 class="section-title">需求调研</h2>
+    <div class="section-content">
+        <div class="category-wrapper">
+            <div class="category green">关键词研究</div>
+            <div class="site-group">
+                <!-- Google Trends -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-chart-line" style="color: #4285f4;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://trends.google.com/trends/" target="_blank">Google Trends</a>
+                        <p>分析关键词搜索趋势和热门话题的免费工具</p>
+                    </div>
+                </div>
+                
+                <!-- SearchSuggest -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-search" style="color: #ff6b6b;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://www.searchsuggest.tips/?keyword=" target="_blank">SearchSuggest</a>
+                        <p>挖掘搜索引擎自动补全提示的关键词研究工具</p>
+                    </div>
+                </div>
+                
+                <!-- KeywordDifficultyChecker -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-key" style="color: #ffa700;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://ahrefs.com/keyword-difficulty" target="_blank">Keyword Difficulty Checker</a>
+                        <p>评估关键词竞争难度和搜索量的专业SEO工具</p>
+                    </div>
+                </div>
+                
+                <!-- Top Websites -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-trophy" style="color: #ffa700;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://ahrefs.com/websites#trending" target="_blank">Top Websites</a>
+                        <p>追踪和分析全球顶级网站流量和增长趋势的工具</p>
+                    </div>
+                </div>
+            </div>
+</div>
         
-        // 为卡片添加顺序出现动画
-        const cards = document.querySelectorAll('.card');
-        cards.forEach((card, index) => {
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 100 * index);
-        });
-    });
-    
-    // 初始设置卡片不可见
-    document.addEventListener('DOMContentLoaded', function() {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        });
-    });
-</script>
+        <div class="category-wrapper">
+            <div class="category green">市场调研</div>
+            <div class="site-group">
+                <!-- Toolify.ai -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-robot" style="color: #6c5ce7;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://www.toolify.ai/" target="_blank">Toolify.ai</a>
+                        <p>AI工具搜索引擎，帮助发现和比较各类人工智能应用</p>
+                    </div>
+                </div>
+                
+                <!-- theresanaiforthat -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-brain" style="color: #00b894;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://theresanaiforthat.com/" target="_blank">TheresAnAIForThat</a>
+                        <p>按需求类型分类的AI工具综合目录，方便找到合适解决方案</p>
+                    </div>
+                </div>
+                
+                <!-- HuggingFace -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-smile-beam" style="color: #ff9ff3;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://huggingface.co/" target="_blank">HuggingFace</a>
+                        <p>开源AI模型共享社区，提供数千种机器学习模型和数据集</p>
+                    </div>
+                </div>
+                
+                <!-- Producthunt -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-cat" style="color: #da552f;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://www.producthunt.com/" target="_blank">Producthunt</a>
+                        <p>发现和推广新产品的平台，每日展示最新科技创新</p>
+                    </div>
+                </div>
+                
+                <!-- AI Short Video Market -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-file-alt" style="color: #34a853;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://docs.google.com/spreadsheets/d/1QOdqq9KbjQj1JZO43vc1pir2rnEEsMUXzTDATrOCn2k/edit?pli=1&gid=0#gid=0" target="_blank">AI短视频市场概览</a>
+                        <p>详细分析AI短视频市场的竞争格局与发展趋势的数据表</p>
+                    </div>
+                </div>
+                
+                <!-- Solopreneur Report -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-table" style="color: #34a853;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://docs.google.com/spreadsheets/d/1eUni44pIURML2VWFFXKzNmm-WKuuam9_ynr5Fo_Q74M/edit?gid=83151001#gid=83151001" target="_blank">独立创业者报告2.0</a>
+                        <p>全面呈现成功独立创业案例、数据和盈利模式的高级报告</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 上站必备 -->
+<div id="section-essential" class="section">
+    <h2 class="section-title">上站必备</h2>
+    <div class="section-content">
+        <div class="category-wrapper">
+            <div class="category orange">域名查询</div>
+            <div class="site-group">
+                <!-- leandomainsearch -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-search" style="color: #4285f4;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://leandomainsearch.com/" target="_blank">leandomainsearch</a>
+                        <p>提供基于关键词的域名搜索和创意域名建议工具</p>
+                    </div>
+                </div>
+                
+                <!-- Query.Domains -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-globe" style="color: #34a853;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://query.domains/" target="_blank">Query.Domains</a>
+                        <p>高级域名查询工具，支持多种筛选条件的域名搜索</p>
+                    </div>
+                </div>
+                
+                <!-- instantdomainsearch -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-bolt" style="color: #fbbc05;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://instantdomainsearch.com/?q=" target="_blank">instantdomainsearch</a>
+                        <p>实时域名搜索工具，即时显示域名可用性状态</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-wrapper">
+            <div class="category orange">域名注册</div>
+            <div class="site-group">
+                <!-- spaceship -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-rocket" style="color: #5b4ee2;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://www.spaceship.com/zh/" target="_blank">spaceship</a>
+                        <p>面向中文用户的域名注册和管理服务平台</p>
+                    </div>
+                </div>
+                
+                <!-- porkbun -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-bread-slice" style="color: #ff6b6b;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://porkbun.com/" target="_blank">porkbun</a>
+                        <p>提供优惠价格的域名注册和DNS管理服务</p>
+                    </div>
+                </div>
+                
+                <!-- namecheap -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-tag" style="color: #ff742e;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://www.namecheap.com/" target="_blank">namecheap</a>
+                        <p>知名的域名注册商，提供多种域名和网络托管服务</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-wrapper">
+            <div class="category orange">代码和网站托管</div>
+            <div class="site-group">
+                <!-- github -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fab fa-github" style="color: #333333;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://github.com/" target="_blank">github</a>
+                        <p>全球最大的代码托管平台，支持Git版本控制和开源项目管理</p>
+                    </div>
+                </div>
+                
+                <!-- cloudflare -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-cloud" style="color: #f48120;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://dash.cloudflare.com/" target="_blank">cloudflare</a>
+                        <p>提供CDN、DNS管理和网站安全防护的云服务平台</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div><!-- 左列容器结束 -->
+
+<!-- 网站分析 -->
+<div id="section-analysis" class="section">
+    <h2 class="section-title">网站分析</h2>
+    <div class="section-content">
+        <div class="category-wrapper">
+            <div class="category purple">SEO分析工具</div>
+            <div class="site-group">
+                <!-- SEMrush -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-chart-bar" style="color: #ff642e;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://www.semrush.com/projects/" target="_blank">SEMrush</a>
+                        <p>全面的SEO工具套件，提供竞争对手分析、关键词研究和网站审核</p>
+                    </div>
+                </div>
+                
+                <!-- SimilarWeb -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-chart-line" style="color: #2c3e50;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://lp.similarweb.com/check-website-traffic-no-cc/" target="_blank">SimilarWeb</a>
+                        <p>网站流量分析平台，提供竞争对手网站访问数据和用户行为洞察</p>
+                    </div>
+                </div>
+                
+                <!-- Ahrefs -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-search" style="color: #fd9a14;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://ahrefs.com/" target="_blank">Ahrefs</a>
+                        <p>专业SEO工具，强大的反向链接分析器和网站排名追踪功能</p>
+                    </div>
+                </div>
+                
+                <!-- AgencyAnalytics -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-file-alt" style="color: #5c6ac4;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://agencyanalytics.com/" target="_blank">AgencyAnalytics</a>
+                        <p>营销机构专用的报告平台，整合多个营销渠道数据于一体</p>
+                    </div>
+                </div>
+
+                <!-- AITDK -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-tachometer-alt" style="color: #3498db;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://aitdk.com/" target="_blank">AITDK</a>
+                        <p>功能全面的SEO和网站分析工具，提供网站性能评估和竞争情报数据</p>
+                    </div>
+                </div>
+
+                <!-- Free SEO Tools -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-tools" style="color: #fd9a14;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://ahrefs.com/free-seo-tools" target="_blank">Free SEO Tools</a>
+                        <p>Ahrefs提供的免费SEO工具集，包含关键词生成器、SERP检查器等实用功能</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-wrapper">
+            <div class="category purple">搜索引擎工具</div>
+            <div class="site-group">
+                <!-- Google Analytics -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-chart-pie" style="color: #f57c00;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://analytics.google.com/analytics/web/?hl=zh-cn#/provision/create" target="_blank">Google Analytics</a>
+                        <p>谷歌官方免费网站分析工具，提供详细的访客数据和转化追踪</p>
+                    </div>
+                </div>
+                
+                <!-- Google Search Console -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fab fa-google" style="color: #4285f4;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://search.google.com/search-console/about" target="_blank">Google Search Console</a>
+                        <p>监控网站在谷歌搜索中表现的必备工具，提供关键词和索引数据</p>
+                    </div>
+                </div>
+                
+                <!-- Instant Domain Search -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fas fa-globe" style="color: #27ae60;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://instantdomainsearch.com/" target="_blank">Instant Domain Search</a>
+                        <p>实时域名可用性检查工具，快速找到适合的网站域名</p>
+                    </div>
+                </div>
+                
+                <!-- Bing Webmaster -->
+                <div class="site-item">
+                    <div class="site-icon">
+                        <i class="fab fa-windows" style="color: #0078d7;"></i>
+                    </div>
+                    <div class="site-info">
+                        <a href="https://www.bing.com/webmasters/about" target="_blank">Bing Webmaster</a>
+                        <p>微软提供的网站管理工具，优化网站在必应搜索引擎中的表现</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 上站模板 -->
+        <div id="section-template" class="section">
+            <h2 class="section-title">上站模板</h2>
+            <div class="section-content">
+                <div class="category-wrapper">
+                    <div class="category teal">模板中心</div>
+                    <div class="site-group">
+                        <!-- Vercel Templates -->
+                        <div class="site-item">
+                            <div class="site-icon">
+                                <i class="fas fa-layer-group" style="color: #000000;"></i>
+                            </div>
+                            <div class="site-info">
+                                <a href="https://vercel.com/templates" target="_blank">Vercel Templates</a>
+                                <p>Vercel官方提供的高质量网站和应用模板库</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="category-wrapper">
+                    <div class="category teal">开源模板</div>
+                    <div class="site-group">
+                        <!-- 模板1 -->
+                        <div class="site-item">
+                            <div class="site-icon">
+                                <i class="fab fa-github" style="color: #333333;"></i>
+                            </div>
+                            <div class="site-info">
+                                <a href="https://github.com/openRin/Rin" target="_blank">模板1</a>
+                                <p>Rin - 一个干净简洁的开源网站模板</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 模板2 -->
+                        <div class="site-item">
+                            <div class="site-icon">
+                                <i class="fab fa-github" style="color: #333333;"></i>
+                            </div>
+                            <div class="site-info">
+                                <a href="https://github.com/ixartz/Next-js-Boilerplate" target="_blank">模板2</a>
+                                <p>Next.js Boilerplate - 全功能Next.js启动模板</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 模板3 -->
+                        <div class="site-item">
+                            <div class="site-icon">
+                                <i class="fab fa-github" style="color: #333333;"></i>
+                            </div>
+                            <div class="site-info">
+                                <a href="https://github.com/ixartz/SaaS-Boilerplate" target="_blank">模板3</a>
+                                <p>SaaS Boilerplate - 用于快速构建SaaS应用的模板</p>
+                            </div>
+                        </div>
+        
+        <!-- 模板4 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/ixartz/Next-JS-Landing-Page-Starter-Template" target="_blank">模板4</a>
+                <p>Next.js 落地页启动模板 - 高质量的Next.js营销页面框架</p>
+            </div>
+        </div>
+        
+        <!-- 模板5 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/ixartz/Astro-boilerplate" target="_blank">模板5</a>
+                <p>Astro模板 - 使用Astro框架构建高性能网站的起点</p>
+            </div>
+        </div>
+        
+        <!-- 模板6 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/weijunext/landing-page-boilerplate" target="_blank">模板6</a>
+                <p>落地页样板 - 快速开发产品介绍页的现代化模板</p>
+            </div>
+        </div>
+        
+        <!-- 模板7 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/ai-aigc-studio/Viggle-AI-WebUI" target="_blank">模板7</a>
+                <p>Viggle AI WebUI - AI应用程序的现代化Web界面模板</p>
+            </div>
+        </div>
+        
+        <!-- 模板8 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/weijunext/new-blog" target="_blank">模板8</a>
+                <p>新式博客 - 现代化的博客网站框架，简洁高效</p>
+            </div>
+        </div>
+        
+        <!-- 模板9 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/weijunext/gapis.money" target="_blank">模板9</a>
+                <p>Gapis Money - API管理与货币化平台的前端模板</p>
+            </div>
+        </div>
+        
+        <!-- 模板10 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/daimajia/huntscreens" target="_blank">模板10</a>
+                <p>Hunt Screens - 屏幕截图收集与展示平台模板</p>
+            </div>
+        </div>
+        
+        <!-- 模板11 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/weijunext/smart-excel-ai" target="_blank">模板11</a>
+                <p>Smart Excel AI - 智能Excel处理AI工具的Web界面模板</p>
+            </div>
+        </div>
+        
+        <!-- 模板12 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/ashleyrudland/nextjs_vps" target="_blank">模板12</a>
+                <p>Next.js VPS - 为VPS服务器优化的Next.js部署模板</p>
+            </div>
+        </div>
+        
+        <!-- 模板13 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/Pwntus/change-hairstyle-ai" target="_blank">模板13</a>
+                <p>发型变换AI - 人工智能发型试戴应用的前端实现</p>
+            </div>
+        </div>
+        
+        <!-- 模板14 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/replicate/green-screen-creator" target="_blank">模板14</a>
+                <p>绿幕创建器 - AI驱动的图像背景移除与替换工具</p>
+            </div>
+        </div>
+        
+        <!-- 模板15 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/wasp-lang/open-saas/" target="_blank">模板15</a>
+                <p>Open SaaS - 开源SaaS应用程序开发框架</p>
+            </div>
+        </div>
+        
+        <!-- 模板16 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/ocluf/justship" target="_blank">模板16</a>
+                <p>JustShip - 快速部署与交付产品的Web应用框架</p>
+            </div>
+        </div>
+        
+        <!-- 模板17 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/JavascriptMick/supanuxt-saas" target="_blank">模板17</a>
+                <p>SupaNuxt SaaS - 结合Supabase和Nuxt的SaaS启动模板</p>
+            </div>
+        </div>
+        
+        <!-- 模板18 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/saasfly/saasfly" target="_blank">模板18</a>
+                <p>SaaSFly - 轻量级SaaS项目快速启动框架</p>
+            </div>
+        </div>
+        
+        <!-- 模板19 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/mundane799699/xlike-web" target="_blank">模板19</a>
+                <p>XLike Web - 类社交点赞应用的Web前端实现</p>
+            </div>
+        </div>
+    </div>
+</div>
+                
+                <div class="category-wrapper">
+                    <div class="category teal">导航站模板</div>
+                    <div class="site-group">
+                        <!-- 模板1 -->
+                        <div class="site-item">
+                            <div class="site-icon">
+                                <i class="fab fa-github" style="color: #333333;"></i>
+                            </div>
+                            <div class="site-info">
+                                <a href="https://github.com/fre123-com/fre123-nav/" target="_blank">模板1</a>
+                                <p>fre123-nav - 开源的网址导航站点模板</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 模板2 -->
+                        <div class="site-item">
+                            <div class="site-icon">
+                                <i class="fab fa-github" style="color: #333333;"></i>
+                            </div>
+                            <div class="site-info">
+                                <a href="https://github.com/dubinc/oss-gallery?ref=ossgallery" target="_blank">模板2</a>
+                                <p>OSS Gallery - 开源项目展示与导航模板</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 模板3 -->
+                        <div class="site-item">
+                            <div class="site-icon">
+                                <i class="fab fa-github" style="color: #333333;"></i>
+                            </div>
+                            <div class="site-info">
+                                <a href="https://github.com/WebStackPage/WebStackPage.github.io" target="_blank">模板3</a>
+                                <p>WebStackPage - 经典网址导航网站开源项目</p>
+                            </div>
+                        </div>
+
+        
+        <!-- 模板4 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/6677-ai/tap4-ai-webui" target="_blank">模板4</a>
+                <p>Tap4 AI WebUI - AI工具导航界面模板，提供美观的AI工具聚合展示</p>
+            </div>
+        </div>
+        
+        <!-- 模板5 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/all-in-aigc/gpts-works" target="_blank">模板5</a>
+                <p>GPTs Works - GPT应用导航与展示平台，便于发现和使用各类GPT工具</p>
+            </div>
+        </div>
+        
+        <!-- 模板6 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/ddahan/ui-libs" target="_blank">模板6</a>
+                <p>UI Libs - UI库资源导航，帮助开发者快速查找和比较各类前端库</p>
+            </div>
+        </div>
+        
+        <!-- 模板7 -->
+        <div class="site-item">
+            <div class="site-icon">
+                <i class="fab fa-github" style="color: #333333;"></i>
+            </div>
+            <div class="site-info">
+                <a href="https://github.com/DokeyAI/dokeyai-data" target="_blank">模板7</a>
+                <p>DokeyAI Data - AI数据集与资源导航，整合多种AI开发所需资源</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+ </div>
 </body>
 </html>
